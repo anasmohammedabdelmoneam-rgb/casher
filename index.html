@@ -132,6 +132,36 @@ SIDEBAR
     color:white;
 
 }
+    #printBtn{
+
+    width:100%;
+    margin-top:10px;
+
+    border:none;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+#printBtn:hover{
+
+    background:#1d4ed8;
+
+}
 
 /*=============================
 MAIN
@@ -962,6 +992,19 @@ ${totalPrice.textContent}`);
 
     document.getElementById("invoiceNo").textContent =
         Number(document.getElementById("invoiceNo").textContent) + 1;
+
+});
+    document.getElementById("printBtn").addEventListener("click",()=>{
+
+    if(cart.length===0){
+
+        alert("لا توجد فاتورة للطباعة.");
+
+        return;
+
+    }
+
+    window.print();
 
 });
 </script>
