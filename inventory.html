@@ -1,16 +1,171 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
 <meta charset="UTF-8">
-<title>المخزون - Jaguar POS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>المخزون | Jaguar POS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Cairo,sans-serif;
+}
+
+body{
+background:#eef3fa;
+padding:40px;
+}
+
+.container{
+
+max-width:1200px;
+margin:auto;
+
+}
+
+.card{
+
+background:#fff;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+h1{
+
+margin-bottom:25px;
+color:#2563eb;
+
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+
+}
+
+th,td{
+
+padding:15px;
+border-bottom:1px solid #eee;
+text-align:center;
+
+}
+
+th{
+
+background:#2563eb;
+color:white;
+
+}
+
+.low{
+
+color:red;
+font-weight:bold;
+
+}
+
+.good{
+
+color:green;
+font-weight:bold;
+
+}
+
+button{
+
+margin-top:25px;
+padding:12px 22px;
+background:#2563eb;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+button:hover{
+
+background:#1d4ed8;
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-<h1>صفحة المخزون</h1>
+<div class="container">
 
-<button onclick="window.location.href='index.html'">
-العودة للكاشير
+<div class="card">
+
+<h1>إدارة المخزون</h1>
+
+<table>
+
+<tr>
+
+<th>المنتج</th>
+<th>المتوفر</th>
+<th>الحالة</th>
+
+</tr>
+
+<tr>
+
+<td>كوكاكولا</td>
+<td>25</td>
+<td class="good">متوفر</td>
+
+</tr>
+
+<tr>
+
+<td>بيبسي</td>
+<td>4</td>
+<td class="low">منخفض</td>
+
+</tr>
+
+<tr>
+
+<td>مياه</td>
+<td>60</td>
+<td class="good">متوفر</td>
+
+</tr>
+
+<tr>
+
+<td>شيبسي</td>
+<td>8</td>
+<td class="low">منخفض</td>
+
+</tr>
+
+</table>
+
+<button onclick="location.href='index.html'">
+
+⬅ العودة للكاشير
+
 </button>
 
+</div>
+
+</div>
+
 </body>
+
 </html>
