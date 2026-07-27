@@ -99,6 +99,50 @@ button:hover{
 background:#1d4ed8;
 
 }
+  .modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-content{
+    width:400px;
+    background:#fff;
+    border-radius:20px;
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.modal-content input{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:16px;
+}
+
+.modal-content button{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.modal-content button:first-of-type{
+    background:#22c55e;
+    color:#fff;
+}
+
+.modal-content button:last-of-type{
+    background:#ef4444;
+    color:#fff;
+}
 
 </style>
 
@@ -161,10 +205,90 @@ background:#1d4ed8;
 ⬅ العودة للكاشير
 
 </button>
+  <button onclick="openAddStock()">
+    ➕ إضافة مخزون جديد
+</button>
 
 </div>
 
 </div>
+  <div id="stockModal" class="modal">
+
+<div class="modal-content">
+
+<h2>إضافة منتج للمخزون</h2>
+
+<input id="stockName" placeholder="اسم المنتج">
+
+<input id="stockPrice" type="number" placeholder="السعر">
+
+<input id="stockQty" type="number" placeholder="الكمية">
+
+<button onclick="saveStock()">
+حفظ
+</button>
+
+<button onclick="closeAddStock()">
+إلغاء
+</button>
+
+</div>
+
+</div>
+  <script>
+
+function openAddStock(){
+    document.getElementById("stockModal").style.display = "flex";
+}
+
+function closeAddStock(){
+    document.getElementById("stockModal").style.display = "none";
+}
+
+function saveStock(){
+
+    const name = document.getElementById("stockName").value;
+    const price = document.getElementById("stockPrice").value;
+    const qty = document.getElementById("stockQty").value;
+
+    if(name==="" || price==="" || qty===""){
+        alert("يرجى إدخال جميع البيانات");
+        return;
+    }
+
+    const table = document.querySelector("table");
+
+    const row = table.insertRow(-1);
+
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${qty}</td>
+        <td class="${qty<=10?'low':'good'}">
+            ${qty<=10?'منخفض':'متوفر'}
+        </td>
+    `;
+
+    document.getElementById("stockName").value="";
+    document.getElementById("stockPrice").value="";
+    document.getElementById("stockQty").value="";
+
+    closeAddStock();
+
+    alert("تمت إضافة المنتج للمخزون بنجاح");
+
+}
+
+window.onclick=function(e){
+
+    const modal=document.getElementById("stockModal");
+
+    if(e.target===modal){
+        closeAddStock();
+    }
+
+}
+
+</script>
 
 </body>
 
