@@ -2,12 +2,23 @@
 <html lang="ar" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Jaguar POS</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap"
+rel="stylesheet">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
@@ -15,792 +26,983 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 <style>
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Cairo",sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Cairo",sans-serif;
 }
 
-html,
-body{
-    width:100%;
-    height:100%;
+html,body{
+width:100%;
+height:100%;
+background:#eef3fa;
+overflow:hidden;
+color:#222;
 }
-
-body{
-
-    background:#eef3fa;
-
-    overflow:hidden;
-
-    color:#222;
-
-}
-
-/*=============================
-APP
-=============================*/
 
 .app{
-
-    display:flex;
-
-    width:100%;
-
-    height:100vh;
-
+display:flex;
+width:100%;
+height:100vh;
 }
 
-/*=============================
-SIDEBAR
-=============================*/
+/*========================
+Sidebar
+========================*/
 
 .sidebar{
 
-    width:260px;
+width:260px;
+background:#111827;
+color:#fff;
 
-    background:#111827;
+display:flex;
+flex-direction:column;
 
-    color:#fff;
+padding:25px;
 
-    display:flex;
-
-    flex-direction:column;
-
-    padding:25px;
-
-    box-shadow:4px 0 20px rgba(0,0,0,.18);
+box-shadow:5px 0 20px rgba(0,0,0,.15);
 
 }
 
 .logo{
 
-    display:flex;
+font-size:28px;
+font-weight:800;
 
-    align-items:center;
+display:flex;
+align-items:center;
+justify-content:center;
 
-    justify-content:center;
+gap:10px;
 
-    font-size:28px;
+margin-bottom:35px;
 
-    font-weight:800;
-
-    color:#4da3ff;
-
-    margin-bottom:35px;
+color:#3b82f6;
 
 }
 
 .nav-btn{
 
-    width:100%;
+border:none;
+background:none;
 
-    border:none;
+color:#d1d5db;
 
-    background:transparent;
+padding:16px;
 
-    color:#d9d9d9;
+margin-bottom:10px;
 
-    padding:16px;
+border-radius:14px;
 
-    margin-bottom:12px;
+cursor:pointer;
 
-    border-radius:14px;
+font-size:17px;
 
-    text-align:right;
+text-align:right;
 
-    cursor:pointer;
+transition:.25s;
 
-    font-size:16px;
-
-    transition:.25s;
+width:100%;
 
 }
 
 .nav-btn:hover{
 
-    background:#1f2937;
+background:#1f2937;
 
-    color:white;
+color:white;
 
 }
 
 .nav-btn.active{
 
-    background:#2563eb;
+background:#2563eb;
 
-    color:white;
-
-}
-    #printBtn{
-
-    width:100%;
-    margin-top:10px;
-
-    border:none;
-
-    background:#2563eb;
-
-    color:white;
-
-    padding:16px;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    transition:.3s;
+color:white;
 
 }
 
-#printBtn:hover{
-
-    background:#1d4ed8;
-
-}
-
-/*=============================
-MAIN
-=============================*/
+/*========================
+Main
+========================*/
 
 .main{
 
-    flex:1;
+flex:1;
 
-    display:flex;
+display:flex;
 
-    flex-direction:column;
+flex-direction:column;
+
+overflow:hidden;
 
 }
 
-/*=============================
-TOPBAR
-=============================*/
+/*========================
+Topbar
+========================*/
 
 .topbar{
 
-    height:80px;
+height:80px;
 
-    background:white;
+background:white;
 
-    display:flex;
+display:flex;
 
-    align-items:center;
+align-items:center;
 
-    justify-content:space-between;
+justify-content:space-between;
 
-    padding:0 30px;
+padding:0 25px;
 
-    box-shadow:0 5px 18px rgba(0,0,0,.05);
-
-}
-
-.search-box{
-
-    width:360px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    background:#f4f6fb;
-
-    padding:14px 18px;
-
-    border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
 
 }
 
-.search-box input{
+#pageTitle{
 
-    flex:1;
+font-size:28px;
 
-    border:none;
+color:#2563eb;
 
-    background:transparent;
-
-    outline:none;
-
-    font-size:15px;
+font-weight:800;
 
 }
 
-.invoice{
+/*========================
+Pages
+========================*/
 
-    font-size:18px;
+.page{
 
-    font-weight:bold;
+flex:1;
 
-    color:#2563eb;
+padding:25px;
+
+overflow:auto;
 
 }
-/*=============================
-CONTENT
-=============================*/
 
+/*========================
+Cards
+========================*/
+
+.card{
+
+background:white;
+
+border-radius:20px;
+
+padding:25px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+margin-bottom:20px;
+
+}
+
+.card-title{
+
+font-size:22px;
+
+font-weight:bold;
+
+margin-bottom:20px;
+
+}
+
+/*========================
+Buttons
+========================*/
+
+button{
+
+cursor:pointer;
+
+border:none;
+
+transition:.25s;
+
+}
+
+.primary{
+
+background:#2563eb;
+
+color:white;
+
+padding:12px 20px;
+
+border-radius:10px;
+
+}
+
+.primary:hover{
+
+background:#1d4ed8;
+
+}
+
+.success{
+
+background:#22c55e;
+
+color:white;
+
+padding:12px 20px;
+
+border-radius:10px;
+
+}
+
+.success:hover{
+
+background:#16a34a;
+
+}
+
+.danger{
+
+background:#ef4444;
+
+color:white;
+
+padding:12px 20px;
+
+border-radius:10px;
+
+}
+
+.danger:hover{
+
+background:#dc2626;
+
+}
+
+/*========================
+Inputs
+========================*/
+
+input,
+select,
+textarea{
+
+width:100%;
+
+padding:12px;
+
+border:1px solid #ddd;
+
+border-radius:12px;
+
+outline:none;
+
+font-size:15px;
+
+margin-bottom:15px;
+
+}
+
+input:focus{
+
+border-color:#2563eb;
+
+}
+
+/*========================
+Tables
+========================*/
+
+table{
+
+width:100%;
+
+border-collapse:collapse;
+
+background:white;
+
+}
+
+th{
+
+background:#2563eb;
+
+color:white;
+
+padding:15px;
+
+}
+
+td{
+
+padding:15px;
+
+text-align:center;
+
+border-bottom:1px solid #eee;
+
+}
+
+/*========================
+Modal
+========================*/
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.45);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+}
+
+.modal-content{
+
+width:420px;
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+animation:popup .25s;
+
+}
+
+@keyframes popup{
+
+from{
+
+transform:scale(.9);
+
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+
+opacity:1;
+
+}
+
+}
+
+/*========================
+Responsive
+========================*/
+
+@media(max-width:900px){
+
+.sidebar{
+
+display:none;
+
+}
+
+.main{
+
+width:100%;
+
+}
+
+}التالي
 .content{
 
-    flex:1;
+display:grid;
 
-    display:grid;
+grid-template-columns:1fr 380px;
 
-    grid-template-columns:1fr 360px;
+gap:20px;
 
-    gap:20px;
-
-    padding:20px;
-
-    overflow:hidden;
+height:100%;
 
 }
-
-/*=============================
-PRODUCTS
-=============================*/
 
 .products{
 
-    background:#fff;
-
-    border-radius:22px;
-
-    padding:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    overflow:hidden;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.05);
+overflow:auto;
 
 }
 
-.section-title{
+.cart{
 
-    font-size:24px;
-
-    font-weight:800;
-
-    margin-bottom:20px;
+overflow:auto;
 
 }
 
 .product-grid{
 
-    flex:1;
+display:grid;
 
-    display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
 
-    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+gap:18px;
 
-    gap:18px;
-
-    overflow-y:auto;
-
-    padding-right:5px;
+margin-top:20px;
 
 }
 
 .product-card{
 
-    background:#f8faff;
+background:white;
 
-    border:2px solid transparent;
+border-radius:18px;
 
-    border-radius:18px;
+padding:15px;
 
-    padding:15px;
+cursor:pointer;
 
-    cursor:pointer;
+box-shadow:0 8px 20px rgba(0,0,0,.06);
 
-    transition:.25s;
+transition:.25s;
 
 }
 
 .product-card:hover{
 
-    transform:translateY(-5px);
-
-    border-color:#2563eb;
-
-    box-shadow:0 12px 25px rgba(37,99,235,.15);
+transform:translateY(-5px);
 
 }
 
 .product-card img{
 
-    width:100%;
+width:100%;
 
-    height:150px;
+height:160px;
 
-    object-fit:cover;
+object-fit:cover;
 
-    border-radius:14px;
+border-radius:12px;
 
 }
 
 .product-name{
 
-    font-size:17px;
+font-size:18px;
 
-    font-weight:700;
+font-weight:bold;
 
-    margin-top:12px;
+margin-top:10px;
 
 }
 
 .product-price{
 
-    color:#2563eb;
+color:#2563eb;
 
-    font-size:18px;
+font-weight:bold;
 
-    font-weight:800;
+margin-top:8px;
 
-    margin-top:8px;
-
-}
-
-/*=============================
-CART
-=============================*/
-
-.cart{
-
-    background:#fff;
-
-    border-radius:22px;
-
-    padding:20px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.05);
+font-size:18px;
 
 }
 
-.cart-items{
+.cart-item{
 
-    flex:1;
+display:flex;
 
-    overflow-y:auto;
+justify-content:space-between;
 
-    margin-top:15px;
+align-items:center;
+
+padding:12px 0;
+
+border-bottom:1px solid #eee;
 
 }
 
 .empty{
 
-    text-align:center;
+text-align:center;
 
-    color:#999;
+color:#888;
 
-    margin-top:40px;
-
-}
-
-.summary{
-
-    margin-top:20px;
-
-    border-top:1px solid #eee;
-
-    padding-top:20px;
+padding:40px;
 
 }
-
-.summary div{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:14px;
-
-    font-size:17px;
-
-}
-
-.summary strong{
-
-    color:#2563eb;
-
-}
-
-#payBtn{
-
-    margin-top:15px;
-
-    width:100%;
-
-    border:none;
-
-    background:#22c55e;
-
-    color:#fff;
-
-    padding:16px;
-
-    border-radius:14px;
-
-    cursor:pointer;
-
-    font-size:18px;
-
-    font-weight:bold;
-
-    transition:.25s;
-
-}
-
-#payBtn:hover{
-
-    background:#16a34a;
-
-}
-
-/*=============================
-SCROLLBAR
-=============================*/
-
-::-webkit-scrollbar{
-
-    width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:#c7d2fe;
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:#2563eb;
-
-}
-
-/*=============================
-RESPONSIVE
-=============================*/
-
-@media(max-width:1100px){
-
-    .sidebar{
-
-        display:none;
-
-    }
-
-    .content{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .cart{
-
-        min-height:350px;
-
-    }
-
-    .search-box{
-
-        width:220px;
-
-    }
-
-}
-
 </style>
+
 </head>
+
 <body>
 
 <div class="app">
 
-    <!-- الشريط الجانبي -->
+    <!-- القائمة الجانبية -->
 
-<aside class="sidebar">
+    <aside class="sidebar">
 
-    <div class="logo">
-        <i class="fa-solid fa-cash-register"></i>&nbsp; Jaguar POS
-    </div>
+        <div class="logo">
 
-    <button class="nav-btn active" onclick="location.href='index.html'">
-        <i class="fa-solid fa-cart-shopping"></i>
-        الكاشير
-    </button>
+            <i class="fa-solid fa-cash-register"></i>
 
-    <button class="nav-btn" onclick="location.href='products.html'">
-        <i class="fa-solid fa-box"></i>
-        المنتجات
-    </button>
+            Jaguar POS
 
-    <button class="nav-btn" onclick="location.href='inventory.html'">
-        <i class="fa-solid fa-warehouse"></i>
-        المخزون
-    </button>
+        </div>
 
-    <button class="nav-btn" onclick="location.href='reports.html'">
-        <i class="fa-solid fa-chart-line"></i>
-        التقارير
-    </button>
+        <button class="nav-btn active"
+        onclick="showPage('cashier')">
 
-    <button class="nav-btn" onclick="location.href='settings.html'">
-        <i class="fa-solid fa-gear"></i>
-        الإعدادات
-    </button>
+            <i class="fa-solid fa-cart-shopping"></i>
 
-</aside>
+            الكاشير
+
+        </button>
+
+        <button class="nav-btn"
+        onclick="showPage('products')">
+
+            <i class="fa-solid fa-box"></i>
+
+            المنتجات
+
+        </button>
+
+        <button class="nav-btn"
+        onclick="showPage('inventory')">
+
+            <i class="fa-solid fa-warehouse"></i>
+
+            المخزون
+
+        </button>
+
+        <button class="nav-btn"
+        onclick="showPage('reports')">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            التقارير
+
+        </button>
+
+        <button class="nav-btn"
+        onclick="showPage('settings')">
+
+            <i class="fa-solid fa-gear"></i>
+
+            الإعدادات
+
+        </button>
+
+    </aside>
 
     <!-- المحتوى -->
+
     <main class="main">
 
-        <!-- الشريط العلوي -->
         <header class="topbar">
 
-            <div class="search-box">
+            <h2 id="pageTitle">
 
-                <i class="fa-solid fa-magnifying-glass"></i>
+                الكاشير
 
-                <input
-                    type="text"
-                    id="searchInput"
-                    placeholder="ابحث عن منتج...">
-
-            </div>
-
-            <div class="invoice">
-
-                فاتورة #
-
-                <span id="invoiceNo">
-                    1001
-                </span>
-
-            </div>
+            </h2>
 
         </header>
 
-        <!-- المحتوى -->
-        <section class="content">
+        <!-- صفحة الكاشير -->
 
-            <!-- المنتجات -->
-            <section class="products">
+        <section id="cashierPage" class="page">
 
-                <div class="section-title">
-                    المنتجات
-                </div>
+<div class="content">
 
-                <div
-                    id="productGrid"
-                    class="product-grid">
+<div class="products">
 
-                    <!-- سيتم إنشاء المنتجات بواسطة JavaScript -->
+<div class="card">
 
-                </div>
+<h2 class="card-title">
+المنتجات
+</h2>
 
-            </section>
+<input
+type="text"
+id="searchInput"
+placeholder="ابحث عن منتج...">
 
-            <!-- الفاتورة -->
-            <aside class="cart">
+<div id="productGrid"
+class="product-grid">
 
-                <div class="section-title">
-                    الفاتورة
-                </div>
+</div>
 
-                <div
-                    id="cartItems"
-                    class="cart-items">
+</div>
 
-                    <p class="empty">
-                        لا توجد منتجات في الفاتورة.
-                    </p>
+</div>
 
-                </div>
+<div class="cart">
 
-                <div class="summary">
+<div class="card">
 
-                    <div>
-                        <span>عدد المنتجات</span>
-                        <strong id="itemsCount">0</strong>
-                    </div>
+<h2 class="card-title">
+الفاتورة
+</h2>
 
-                    <div>
-                        <span>الإجمالي</span>
-                        <strong id="totalPrice">0.00 ج.م</strong>
-                    </div>
+<div
+id="cartItems">
 
-                </div>
+<p class="empty">
 
-<button id="payBtn">
-    <i class="fa-solid fa-credit-card"></i>
-    إتمام الدفع
+لا توجد منتجات.
+
+</p>
+
+</div>
+
+<hr style="margin:20px 0;">
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+margin-bottom:10px;
+">
+
+<span>
+
+عدد المنتجات
+
+</span>
+
+<strong
+id="itemsCount">
+
+0
+
+</strong>
+
+</div>
+
+<div
+style="
+display:flex;
+justify-content:space-between;
+margin-bottom:20px;
+">
+
+<span>
+
+الإجمالي
+
+</span>
+
+<strong
+id="totalPrice">
+
+0.00 ج.م
+
+</strong>
+
+</div>
+
+<button
+class="success"
+id="payBtn"
+style="width:100%;">
+
+💳 إتمام الدفع
+
 </button>
 
-<button id="printBtn">
-    <i class="fa-solid fa-print"></i>
-    طباعة الفاتورة
+<button
+class="primary"
+id="printBtn"
+style="
+width:100%;
+margin-top:10px;
+">
+
+🖨️ طباعة الفاتورة
+
 </button>
 
-            </aside>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="inventoryPage" class="page" style="display:none;">
+
+<div class="card">
+
+<h2 class="card-title">إدارة المخزون</h2>
+
+<button class="success" onclick="openAddStock()">
+➕ إضافة مخزون جديد
+</button>
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+<th>المنتج</th>
+<th>السعر</th>
+<th>الكمية</th>
+<th>الحالة</th>
+</tr>
+
+</thead>
+
+<tbody id="stockTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+<div id="stockModal" class="modal">
+
+<div class="modal-content">
+
+<h2>إضافة منتج</h2>
+
+<input id="stockName" placeholder="اسم المنتج">
+
+<input id="stockPrice" type="number" placeholder="السعر">
+
+<input id="stockQty" type="number" placeholder="الكمية">
+
+<input id="stockImage" placeholder="رابط الصورة">
+
+<button class="success" onclick="saveStock()">
+حفظ
+</button>
+
+<button class="danger" onclick="closeAddStock()">
+إلغاء
+</button>
+
+</div>
+
+</div>
+
+</section>
+        <!-- صفحة المنتجات -->
+
+      <section
+id="productsPage"
+class="page"
+style="display:none;">
+
+<div class="card">
+
+<h2 class="card-title">
+
+إدارة المنتجات
+
+</h2>
+
+<input
+id="productName"
+placeholder="اسم المنتج">
+
+<input
+id="productPrice"
+type="number"
+placeholder="السعر">
+
+<input
+id="productImage"
+placeholder="رابط الصورة">
+
+<button
+class="success"
+onclick="saveProduct()">
+
+➕ إضافة المنتج
+
+</button>
+
+<hr style="margin:20px 0;">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>الصورة</th>
+<th>الاسم</th>
+<th>السعر</th>
+<th>الإجراءات</th>
+
+</tr>
+
+</thead>
+
+<tbody id="productsTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+        <!-- صفحة المخزون -->
+<!-- صفحة المخزون -->
+
+<section id="inventoryPage" class="page" style="display:none;">
+
+<div class="card">
+
+<h2 class="card-title">
+إدارة المخزون
+</h2>
+
+<button class="success" onclick="openAddStock()">
+➕ إضافة مخزون جديد
+</button>
+
+<br><br>
+
+<table>
+
+<thead>
+<tr>
+<th>المنتج</th>
+<th>السعر</th>
+<th>الكمية</th>
+<th>الحالة</th>
+</tr>
+</thead>
+
+<tbody id="stockTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+
+<div id="stockModal" class="modal">
+
+<div class="modal-content">
+
+<h2>
+إضافة منتج للمخزون
+</h2>
+
+<input id="stockName" placeholder="اسم المنتج">
+
+<input id="stockPrice" type="number" placeholder="السعر">
+
+<input id="stockQty" type="number" placeholder="الكمية">
+
+<input id="stockImage" placeholder="رابط الصورة">
+
+<button class="success" onclick="saveStock()">
+حفظ
+</button>
+
+<button class="danger" onclick="closeAddStock()">
+إلغاء
+</button>
+
+</div>
+
+</div>
+
+
+</section>
+      
+
+        <!-- صفحة التقارير -->
+
+        <section
+        id="reportsPage"
+        class="page"
+        style="display:none;">
+
+        </section>
+
+        <!-- صفحة الإعدادات -->
+
+        <section
+        id="settingsPage"
+        class="page"
+        style="display:none;">
 
         </section>
 
     </main>
 
 </div>
+
 <script>
 
-/*==============================
-    المنتجات
-==============================*/
+/*==================================
+إعداد المنتجات
+==================================*/
 
-const products = [
+let products = JSON.parse(localStorage.getItem("products")) || [
 
 {
-    id:1,
-    name:"كوكاكولا",
-    price:15,
-    image:"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400"
+id:1,
+name:"كوكاكولا",
+price:15,
+image:"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400"
 },
 
 {
-    id:2,
-    name:"بيبسي",
-    price:15,
-    image:"https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=400"
+id:2,
+name:"بيبسي",
+price:18,
+image:"https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=400"
 },
 
 {
-    id:3,
-    name:"مياه",
-    price:5,
-    image:"https://images.unsplash.com/photo-1564419320408-38e24e038739?w=400"
-},
-
-{
-    id:4,
-    name:"شيبسي",
-    price:10,
-    image:"https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=400"
-},
-
-{
-    id:5,
-    name:"شوكولاتة",
-    price:20,
-    image:"https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400"
-},
-
-{
-    id:6,
-    name:"عصير",
-    price:12,
-    image:"https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400"
-},
-
-{
-    id:7,
-    name:"لبن",
-    price:18,
-    image:"https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400"
-},
-
-{
-    id:8,
-    name:"بسكويت",
-    price:8,
-    image:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400"
+id:3,
+name:"مياه",
+price:5,
+image:"https://images.unsplash.com/photo-1564419320408-38e24e038739?w=400"
 }
 
 ];
 
-/*==============================
-    العناصر
-==============================*/
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+/*==================================
+العناصر
+==================================*/
 
 const productGrid =
 document.getElementById("productGrid");
 
 const searchInput =
 document.getElementById("searchInput");
-
-/*==============================
-    عرض المنتجات
-==============================*/
-
-function renderProducts(list){
-
-    productGrid.innerHTML = "";
-
-    list.forEach(product=>{
-
-        productGrid.innerHTML += `
-
-        <div class="product-card" onclick="addToCart(${product.id})">
-
-            <img src="${product.image}" alt="${product.name}">
-
-            <div class="product-name">
-                ${product.name}
-            </div>
-
-            <div class="product-price">
-                ${product.price} ج.م
-            </div>
-
-        </div>
-
-        `;
-
-    });
-
-}
-/*==============================
-    تشغيل أول مرة
-==============================*/
-
-renderProducts(products);
-/*==============================
-    البحث
-==============================*/
-
-searchInput.addEventListener("input", ()=>{
-
-    const keyword = searchInput.value
-    .trim()
-    .toLowerCase();
-
-    const filtered = products.filter(product=>{
-
-        return product.name
-        .toLowerCase()
-        .includes(keyword);
-
-    });
-
-    renderProducts(filtered);
-
-});
-
-/*==============================
-    سلة المشتريات
-==============================*/
-
-let cart = [];
 
 const cartItems =
 document.getElementById("cartItems");
@@ -811,203 +1013,590 @@ document.getElementById("itemsCount");
 const totalPrice =
 document.getElementById("totalPrice");
 
-/*==============================
-    إضافة منتج
-==============================*/
+/*==================================
+السلة
+==================================*/
+
+let cart=[];
+
+/*==================================
+عرض المنتجات
+==================================*/
+
+function renderProducts(list){
+
+productGrid.innerHTML="";
+
+list.forEach(product=>{
+
+productGrid.innerHTML+=`
+
+<div class="product-card"
+onclick="addToCart(${product.id})">
+
+<img src="${product.image}">
+
+<div class="product-name">
+
+${product.name}
+
+</div>
+
+<div class="product-price">
+
+${product.price} ج.م
+
+</div>
+
+</div>
+
+`;
+
+});
+
+}
+
+renderProducts(products);
+
+/*==================================
+البحث
+==================================*/
+
+searchInput.oninput=()=>{
+
+const value =
+searchInput.value.toLowerCase();
+
+const filtered =
+products.filter(product=>
+
+product.name
+.toLowerCase()
+.includes(value)
+
+);
+
+renderProducts(filtered);
+
+};
+    /*==================================
+إضافة منتج للسلة
+==================================*/
 
 function addToCart(id){
 
-    const product =
-    products.find(p=>p.id===id);
+const product=products.find(p=>p.id===id);
 
-    if(!product) return;
+if(!product) return;
 
-    const existing =
-    cart.find(item=>item.id===id);
+const existing=cart.find(p=>p.id===id);
 
-    if(existing){
+if(existing){
 
-        existing.qty++;
+existing.qty++;
 
-    }else{
+}else{
 
-        cart.push({
+cart.push({
 
-            ...product,
+...product,
 
-            qty:1
+qty:1
 
-        });
+});
 
-    }
+}
 
 updateCart();
 
 }
 
-/*==============================
-    تحديث الفاتورة
-==============================*/
+/*==================================
+تحديث السلة
+==================================*/
 
 function updateCart(){
 
-    cartItems.innerHTML="";
+cartItems.innerHTML="";
 
-    if(cart.length===0){
+if(cart.length===0){
 
-        cartItems.innerHTML=`
-        <p class="empty">
-        لا توجد منتجات في الفاتورة.
-        </p>
-        `;
+cartItems.innerHTML=`
 
-        itemsCount.textContent=0;
-        totalPrice.textContent="0.00 ج.م";
+<p class="empty">
 
-        return;
+لا توجد منتجات.
 
-    }
+</p>
 
-    let total=0;
-    let count=0;
+`;
 
-    cart.forEach(item=>{
+itemsCount.textContent=0;
 
-        total+=item.price*item.qty;
-        count+=item.qty;
+totalPrice.textContent="0.00 ج.م";
 
-        cartItems.innerHTML+=`
+return;
+
+}
+
+let total=0;
+let count=0;
+
+cart.forEach(item=>{
+
+total+=item.price*item.qty;
+
+count+=item.qty;
+
+cartItems.innerHTML+=`
 
 <div class="cart-item">
 
-    <div>
+<div>
 
-        <strong>${item.name}</strong><br>
+<strong>${item.name}</strong>
 
-        ${item.price} ج.م
+<br>
 
-    </div>
-
-    <div style="display:flex;align-items:center;gap:8px;">
-
-        <button onclick="decreaseQty(${item.id})">-</button>
-
-        <strong>${item.qty}</strong>
-
-        <button onclick="increaseQty(${item.id})">+</button>
-
-    </div>
-
-    <strong>
-
-        ${(item.price * item.qty).toFixed(2)} ج.م
-
-    </strong>
-
-    <button onclick="removeItem(${item.id})">
-
-        🗑️
-
-    </button>
+${item.price} ج.م
 
 </div>
-        `;
 
-    });
+<div style="display:flex;gap:8px;align-items:center;">
 
-    itemsCount.textContent=count;
-    totalPrice.textContent=total.toFixed(2)+" ج.م";
+<button
+onclick="decreaseQty(${item.id})">
+
+−
+
+</button>
+
+<strong>
+
+${item.qty}
+
+</strong>
+
+<button
+onclick="increaseQty(${item.id})">
+
++
+
+</button>
+
+</div>
+
+<strong>
+
+${(item.price*item.qty).toFixed(2)} ج.م
+
+</strong>
+
+<button
+onclick="removeItem(${item.id})">
+
+🗑️
+
+</button>
+
+</div>
+
+`;
+
+});
+
+itemsCount.textContent=count;
+
+totalPrice.textContent=
+
+total.toFixed(2)+" ج.م";
 
 }
-/*==============================
-    تغيير الكمية
-==============================*/
+
+/*==================================
+زيادة الكمية
+==================================*/
 
 function increaseQty(id){
 
-    const item = cart.find(p => p.id === id);
+const item=
 
-    if(item){
+cart.find(p=>p.id===id);
 
-        item.qty++;
+if(item){
 
-        updateCart();
+item.qty++;
 
-    }
+updateCart();
 
 }
+
+}
+
+/*==================================
+إنقاص الكمية
+==================================*/
 
 function decreaseQty(id){
 
-    const item = cart.find(p => p.id === id);
+const item=
 
-    if(!item) return;
+cart.find(p=>p.id===id);
 
-    item.qty--;
+if(!item) return;
 
-    if(item.qty <= 0){
+item.qty--;
 
-        cart = cart.filter(p => p.id !== id);
+if(item.qty<=0){
 
-    }
+removeItem(id);
 
-    updateCart();
+return;
 
 }
 
-/*==============================
-    حذف منتج
-==============================*/
+updateCart();
+
+}
+
+/*==================================
+حذف منتج
+==================================*/
 
 function removeItem(id){
 
-    cart = cart.filter(p => p.id !== id);
+cart=
 
+cart.filter(p=>p.id!==id);
 
-    updateCart();
+updateCart();
 
 }
-/*==============================
-    زر الدفع
-==============================*/
 
-document.getElementById("payBtn").addEventListener("click", () => {
+/*==================================
+إتمام الدفع
+==================================*/
 
-    if(cart.length === 0){
+document
+.getElementById("payBtn")
+.onclick=function(){
 
-        alert("لا توجد منتجات في الفاتورة.");
+if(cart.length===0){
 
-        return;
+alert("الفاتورة فارغة");
 
-    }
+return;
 
-    alert(`✅ تمت عملية البيع بنجاح
+}
 
-الإجمالي:
-${totalPrice.textContent}`);
+alert(
 
-    cart = [];
+"✅ تمت عملية البيع بنجاح"
 
-    updateCart();
+);
 
-    document.getElementById("invoiceNo").textContent =
-        Number(document.getElementById("invoiceNo").textContent) + 1;
+cart=[];
+
+updateCart();
+
+};
+
+/*==================================
+طباعة الفاتورة
+==================================*/
+
+document
+.getElementById("printBtn")
+.onclick=function(){
+
+window.print();
+
+};
+    /*==================================
+عرض جدول المنتجات
+==================================*/
+
+function renderProductsTable(){
+
+const table=
+document.getElementById("productsTable");
+
+table.innerHTML="";
+
+products.forEach(product=>{
+
+table.innerHTML+=`
+
+<tr>
+
+<td>
+
+<img
+src="${product.image}"
+style="
+width:60px;
+height:60px;
+object-fit:cover;
+border-radius:10px;
+">
+
+</td>
+
+<td>
+
+${product.name}
+
+</td>
+
+<td>
+
+${product.price} ج.م
+
+</td>
+
+<td>
+
+<button
+class="danger"
+onclick="deleteProduct(${product.id})">
+
+حذف
+
+</button>
+
+</td>
+
+</tr>
+
+`;
 
 });
-    document.getElementById("printBtn").addEventListener("click",()=>{
 
-    if(cart.length===0){
+}
 
-        alert("لا توجد فاتورة للطباعة.");
+/*==================================
+إضافة منتج
+==================================*/
 
-        return;
+function saveProduct(){
 
-    }
+const name=
+document.getElementById("productName").value.trim();
 
-    window.print();
+const price=
+Number(document.getElementById("productPrice").value);
+
+const image=
+document.getElementById("productImage").value.trim();
+
+if(!name||!price||!image){
+
+alert("أكمل جميع البيانات");
+
+return;
+
+}
+
+products.push({
+
+id:Date.now(),
+
+name,
+
+price,
+
+image
 
 });
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+renderProducts(products);
+
+renderProductsTable();
+
+document.getElementById("productName").value="";
+document.getElementById("productPrice").value="";
+document.getElementById("productImage").value="";
+
+}
+
+/*==================================
+حذف منتج
+==================================*/
+
+function deleteProduct(id){
+
+if(!confirm("هل تريد حذف المنتج؟")) return;
+
+products=
+products.filter(p=>p.id!==id);
+
+localStorage.setItem(
+"products",
+JSON.stringify(products)
+);
+
+renderProducts(products);
+
+renderProductsTable();
+
+}
+
+renderProductsTable();
+/*==========================
+التنقل بين الصفحات
+==========================*/
+
+function showPage(page){
+
+document.querySelectorAll(".page").forEach(p=>{
+    p.style.display="none";
+});
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.remove("active");
+});
+
+if(page==="cashier"){
+    document.getElementById("cashierPage").style.display="block";
+    document.getElementById("pageTitle").textContent="الكاشير";
+}
+
+if(page==="products"){
+    document.getElementById("productsPage").style.display="block";
+    document.getElementById("pageTitle").textContent="المنتجات";
+}
+
+if(page==="inventory"){
+    document.getElementById("inventoryPage").style.display="block";
+    document.getElementById("pageTitle").textContent="المخزون";
+}
+
+if(page==="reports"){
+    document.getElementById("reportsPage").style.display="block";
+    document.getElementById("pageTitle").textContent="التقارير";
+}
+
+if(page==="settings"){
+    document.getElementById("settingsPage").style.display="block";
+    document.getElementById("pageTitle").textContent="الإعدادات";
+}
+
+document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.remove("active");
+});
+
+document.querySelector(`button[onclick="showPage('${page}')"]`)?.classList.add("active");
+}
+
+/*==========================
+المخزون
+==========================*/
+
+let stock =
+JSON.parse(localStorage.getItem("stock")) || [];
+
+/*==========================
+عرض المخزون
+==========================*/
+
+function renderStock(){
+
+const table =
+document.getElementById("stockTable");
+
+if(!table) return;
+
+table.innerHTML="";
+
+stock.forEach(item=>{
+
+table.innerHTML+=`
+<tr>
+<td>${item.name}</td>
+<td>${item.price} ج.م</td>
+<td>${item.qty}</td>
+<td>${item.qty<=5 ? "منخفض" : "متوفر"}</td>
+</tr>
+`;
+
+});
+
+}
+
+/*==========================
+فتح النافذة
+==========================*/
+
+function openAddStock(){
+
+document.getElementById("stockModal").style.display="flex";
+
+}
+
+/*==========================
+إغلاق النافذة
+==========================*/
+
+function closeAddStock(){
+
+document.getElementById("stockModal").style.display="none";
+
+}
+
+/*==========================
+حفظ المنتج
+==========================*/
+
+function saveStock(){
+
+const name=document.getElementById("stockName").value.trim();
+const price=Number(document.getElementById("stockPrice").value);
+const qty=Number(document.getElementById("stockQty").value);
+const image=document.getElementById("stockImage").value.trim();
+
+if(!name||!price||!qty||!image){
+
+alert("أكمل جميع البيانات");
+
+return;
+
+}
+
+stock.push({
+id:Date.now(),
+name,
+price,
+qty,
+image
+});
+
+products.push({
+id:Date.now()+1,
+name,
+price,
+image
+});
+
+localStorage.setItem("stock",JSON.stringify(stock));
+localStorage.setItem("products",JSON.stringify(products));
+
+renderStock();
+renderProducts(products);
+renderProductsTable();
+
+closeAddStock();
+
+}
+
+renderStock();
+
 </script>
 
 </body>
+
 </html>
