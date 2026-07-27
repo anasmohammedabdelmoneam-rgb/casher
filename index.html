@@ -1,3 +1,512 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Jaguar POS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Cairo",sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+}
+
+body{
+
+    background:#eef3fa;
+
+    overflow:hidden;
+
+    color:#222;
+
+}
+
+/*=============================
+APP
+=============================*/
+
+.app{
+
+    display:flex;
+
+    width:100%;
+
+    height:100vh;
+
+}
+
+/*=============================
+SIDEBAR
+=============================*/
+
+.sidebar{
+
+    width:260px;
+
+    background:#111827;
+
+    color:#fff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:25px;
+
+    box-shadow:4px 0 20px rgba(0,0,0,.18);
+
+}
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:#4da3ff;
+
+    margin-bottom:35px;
+
+}
+
+.nav-btn{
+
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    color:#d9d9d9;
+
+    padding:16px;
+
+    margin-bottom:12px;
+
+    border-radius:14px;
+
+    text-align:right;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.25s;
+
+}
+
+.nav-btn:hover{
+
+    background:#1f2937;
+
+    color:white;
+
+}
+
+.nav-btn.active{
+
+    background:#2563eb;
+
+    color:white;
+
+}
+
+/*=============================
+MAIN
+=============================*/
+
+.main{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/*=============================
+TOPBAR
+=============================*/
+
+.topbar{
+
+    height:80px;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.05);
+
+}
+
+.search-box{
+
+    width:360px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:#f4f6fb;
+
+    padding:14px 18px;
+
+    border-radius:15px;
+
+}
+
+.search-box input{
+
+    flex:1;
+
+    border:none;
+
+    background:transparent;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+.invoice{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#2563eb;
+
+}
+/*=============================
+CONTENT
+=============================*/
+
+.content{
+
+    flex:1;
+
+    display:grid;
+
+    grid-template-columns:1fr 360px;
+
+    gap:20px;
+
+    padding:20px;
+
+    overflow:hidden;
+
+}
+
+/*=============================
+PRODUCTS
+=============================*/
+
+.products{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    overflow:hidden;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+
+}
+
+.section-title{
+
+    font-size:24px;
+
+    font-weight:800;
+
+    margin-bottom:20px;
+
+}
+
+.product-grid{
+
+    flex:1;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+
+    gap:18px;
+
+    overflow-y:auto;
+
+    padding-right:5px;
+
+}
+
+.product-card{
+
+    background:#f8faff;
+
+    border:2px solid transparent;
+
+    border-radius:18px;
+
+    padding:15px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#2563eb;
+
+    box-shadow:0 12px 25px rgba(37,99,235,.15);
+
+}
+
+.product-card img{
+
+    width:100%;
+
+    height:150px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+}
+
+.product-name{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    margin-top:12px;
+
+}
+
+.product-price{
+
+    color:#2563eb;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    margin-top:8px;
+
+}
+
+/*=============================
+CART
+=============================*/
+
+.cart{
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.05);
+
+}
+
+.cart-items{
+
+    flex:1;
+
+    overflow-y:auto;
+
+    margin-top:15px;
+
+}
+
+.empty{
+
+    text-align:center;
+
+    color:#999;
+
+    margin-top:40px;
+
+}
+
+.summary{
+
+    margin-top:20px;
+
+    border-top:1px solid #eee;
+
+    padding-top:20px;
+
+}
+
+.summary div{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:14px;
+
+    font-size:17px;
+
+}
+
+.summary strong{
+
+    color:#2563eb;
+
+}
+
+#payBtn{
+
+    margin-top:15px;
+
+    width:100%;
+
+    border:none;
+
+    background:#22c55e;
+
+    color:#fff;
+
+    padding:16px;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    transition:.25s;
+
+}
+
+#payBtn:hover{
+
+    background:#16a34a;
+
+}
+
+/*=============================
+SCROLLBAR
+=============================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#c7d2fe;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#2563eb;
+
+}
+
+/*=============================
+RESPONSIVE
+=============================*/
+
+@media(max-width:1100px){
+
+    .sidebar{
+
+        display:none;
+
+    }
+
+    .content{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .cart{
+
+        min-height:350px;
+
+    }
+
+    .search-box{
+
+        width:220px;
+
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="app">
+
+    <!-- الشريط الجانبي -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-cash-register"></i>&nbsp; Jaguar POS
+        </div>
+
 <button class="nav-btn active" onclick="window.location.href='index.html'">
     <i class="fa-solid fa-cart-shopping"></i>
     الكاشير
@@ -22,3 +531,433 @@
     <i class="fa-solid fa-gear"></i>
     الإعدادات
 </button>
+    </aside>
+
+    <!-- المحتوى -->
+    <main class="main">
+
+        <!-- الشريط العلوي -->
+        <header class="topbar">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="ابحث عن منتج...">
+
+            </div>
+
+            <div class="invoice">
+
+                فاتورة #
+
+                <span id="invoiceNo">
+                    1001
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- المحتوى -->
+        <section class="content">
+
+            <!-- المنتجات -->
+            <section class="products">
+
+                <div class="section-title">
+                    المنتجات
+                </div>
+
+                <div
+                    id="productGrid"
+                    class="product-grid">
+
+                    <!-- سيتم إنشاء المنتجات بواسطة JavaScript -->
+
+                </div>
+
+            </section>
+
+            <!-- الفاتورة -->
+            <aside class="cart">
+
+                <div class="section-title">
+                    الفاتورة
+                </div>
+
+                <div
+                    id="cartItems"
+                    class="cart-items">
+
+                    <p class="empty">
+                        لا توجد منتجات في الفاتورة.
+                    </p>
+
+                </div>
+
+                <div class="summary">
+
+                    <div>
+                        <span>عدد المنتجات</span>
+                        <strong id="itemsCount">0</strong>
+                    </div>
+
+                    <div>
+                        <span>الإجمالي</span>
+                        <strong id="totalPrice">0.00 ج.م</strong>
+                    </div>
+
+                </div>
+
+                <button id="payBtn">
+                    <i class="fa-solid fa-credit-card"></i>
+                    إتمام الدفع
+                </button>
+
+            </aside>
+
+        </section>
+
+    </main>
+
+</div>
+<script>
+
+/*==============================
+    المنتجات
+==============================*/
+
+const products = [
+
+{
+    id:1,
+    name:"كوكاكولا",
+    price:15,
+    image:"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400"
+},
+
+{
+    id:2,
+    name:"بيبسي",
+    price:15,
+    image:"https://images.unsplash.com/photo-1581006852262-e4307cf6283a?w=400"
+},
+
+{
+    id:3,
+    name:"مياه",
+    price:5,
+    image:"https://images.unsplash.com/photo-1564419320408-38e24e038739?w=400"
+},
+
+{
+    id:4,
+    name:"شيبسي",
+    price:10,
+    image:"https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=400"
+},
+
+{
+    id:5,
+    name:"شوكولاتة",
+    price:20,
+    image:"https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400"
+},
+
+{
+    id:6,
+    name:"عصير",
+    price:12,
+    image:"https://images.unsplash.com/photo-1623065422902-30a2d299bbe4?w=400"
+},
+
+{
+    id:7,
+    name:"لبن",
+    price:18,
+    image:"https://images.unsplash.com/photo-1550583724-b2692b85b150?w=400"
+},
+
+{
+    id:8,
+    name:"بسكويت",
+    price:8,
+    image:"https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=400"
+}
+
+];
+
+/*==============================
+    العناصر
+==============================*/
+
+const productGrid =
+document.getElementById("productGrid");
+
+const searchInput =
+document.getElementById("searchInput");
+
+/*==============================
+    عرض المنتجات
+==============================*/
+
+function renderProducts(list){
+
+    productGrid.innerHTML = "";
+
+    list.forEach(product=>{
+
+        productGrid.innerHTML += `
+
+        <div class="product-card" onclick="addToCart(${product.id})">
+
+            <img src="${product.image}" alt="${product.name}">
+
+            <div class="product-name">
+                ${product.name}
+            </div>
+
+            <div class="product-price">
+                ${product.price} ج.م
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+/*==============================
+    تشغيل أول مرة
+==============================*/
+
+renderProducts(products);
+/*==============================
+    البحث
+==============================*/
+
+searchInput.addEventListener("input", ()=>{
+
+    const keyword = searchInput.value
+    .trim()
+    .toLowerCase();
+
+    const filtered = products.filter(product=>{
+
+        return product.name
+        .toLowerCase()
+        .includes(keyword);
+
+    });
+
+    renderProducts(filtered);
+
+});
+
+/*==============================
+    سلة المشتريات
+==============================*/
+
+let cart = [];
+
+const cartItems =
+document.getElementById("cartItems");
+
+const itemsCount =
+document.getElementById("itemsCount");
+
+const totalPrice =
+document.getElementById("totalPrice");
+
+/*==============================
+    إضافة منتج
+==============================*/
+
+function addToCart(id){
+
+    const product =
+    products.find(p=>p.id===id);
+
+    if(!product) return;
+
+    const existing =
+    cart.find(item=>item.id===id);
+
+    if(existing){
+
+        existing.qty++;
+
+    }else{
+
+        cart.push({
+
+            ...product,
+
+            qty:1
+
+        });
+
+    }
+
+updateCart();
+
+}
+
+/*==============================
+    تحديث الفاتورة
+==============================*/
+
+function updateCart(){
+
+    cartItems.innerHTML="";
+
+    if(cart.length===0){
+
+        cartItems.innerHTML=`
+        <p class="empty">
+        لا توجد منتجات في الفاتورة.
+        </p>
+        `;
+
+        itemsCount.textContent=0;
+        totalPrice.textContent="0.00 ج.م";
+
+        return;
+
+    }
+
+    let total=0;
+    let count=0;
+
+    cart.forEach(item=>{
+
+        total+=item.price*item.qty;
+        count+=item.qty;
+
+        cartItems.innerHTML+=`
+
+<div class="cart-item">
+
+    <div>
+
+        <strong>${item.name}</strong><br>
+
+        ${item.price} ج.م
+
+    </div>
+
+    <div style="display:flex;align-items:center;gap:8px;">
+
+        <button onclick="decreaseQty(${item.id})">-</button>
+
+        <strong>${item.qty}</strong>
+
+        <button onclick="increaseQty(${item.id})">+</button>
+
+    </div>
+
+    <strong>
+
+        ${(item.price * item.qty).toFixed(2)} ج.م
+
+    </strong>
+
+    <button onclick="removeItem(${item.id})">
+
+        🗑️
+
+    </button>
+
+</div>
+        `;
+
+    });
+
+    itemsCount.textContent=count;
+    totalPrice.textContent=total.toFixed(2)+" ج.م";
+
+}
+/*==============================
+    تغيير الكمية
+==============================*/
+
+function increaseQty(id){
+
+    const item = cart.find(p => p.id === id);
+
+    if(item){
+
+        item.qty++;
+
+        updateCart();
+
+    }
+
+}
+
+function decreaseQty(id){
+
+    const item = cart.find(p => p.id === id);
+
+    if(!item) return;
+
+    item.qty--;
+
+    if(item.qty <= 0){
+
+        cart = cart.filter(p => p.id !== id);
+
+    }
+
+    updateCart();
+
+}
+
+/*==============================
+    حذف منتج
+==============================*/
+
+function removeItem(id){
+
+    cart = cart.filter(p => p.id !== id);
+
+
+    updateCart();
+
+}
+/*==============================
+    زر الدفع
+==============================*/
+
+document.getElementById("payBtn").addEventListener("click", () => {
+
+    if(cart.length === 0){
+
+        alert("لا توجد منتجات في الفاتورة.");
+
+        return;
+
+    }
+
+    alert(`✅ تمت عملية البيع بنجاح
+
+الإجمالي:
+${totalPrice.textContent}`);
+
+    cart = [];
+
+    updateCart();
+
+    document.getElementById("invoiceNo").textContent =
+        Number(document.getElementById("invoiceNo").textContent) + 1;
+
+});
+</script>
+
+</body>
+</html>
