@@ -542,7 +542,7 @@ padding:40px;
 
 }
 </style>
-
+<script src="https://unpkg.com/@zxing/library@latest"></script>
 </head>
 
 <body>
@@ -636,10 +636,21 @@ padding:40px;
 المنتجات
 </h2>
 
+<div style="display:flex;gap:10px;margin-bottom:15px;">
+
 <input
 type="text"
 id="searchInput"
-placeholder="ابحث عن منتج...">
+placeholder="ابحث عن منتج..."
+style="flex:1;">
+
+<button
+class="primary"
+onclick="startScanner()">
+📷 مسح الباركود
+</button>
+
+</div>
 
 <div id="productGrid"
 class="product-grid">
@@ -938,21 +949,72 @@ onclick="saveProduct()">
 
         <!-- صفحة التقارير -->
 
-        <section
-        id="reportsPage"
-        class="page"
-        style="display:none;">
+     <section id="reportsPage" class="page" style="display:none;">
 
-        </section>
+<div class="card">
+
+<h2 class="card-title">التقارير</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+
+<div class="card">
+<h3>💰 إجمالي المبيعات</h3>
+<h1 id="reportSales">0.00 ج.م</h1>
+</div>
+
+<div class="card">
+<h3>🧾 عدد الفواتير</h3>
+<h1 id="reportInvoices">0</h1>
+</div>
+
+<div class="card">
+<h3>🛒 المنتجات المباعة</h3>
+<h1 id="reportItems">0</h1>
+</div>
+
+</div>
+
+<br>
+
+<button class="primary" onclick="window.print()">
+🖨️ طباعة التقرير
+</button>
+
+<button class="danger" onclick="resetReports()">
+🗑️ تصفير التقارير
+</button>
+
+</div>
+
+</section>
 
         <!-- صفحة الإعدادات -->
 
-        <section
-        id="settingsPage"
-        class="page"
-        style="display:none;">
+     <section id="settingsPage" class="page" style="display:none;">
 
-        </section>
+<div class="card">
+
+<h2 class="card-title">الإعدادات</h2>
+
+<label>اسم المتجر</label>
+<input id="storeName" placeholder="Jaguar POS">
+
+<label>العملة</label>
+<input id="currency" placeholder="ج.م">
+
+<label>رقم الضريبة (%)</label>
+<input id="tax" type="number" placeholder="0">
+
+<label>رابط شعار المتجر</label>
+<input id="storeLogo" placeholder="https://...">
+
+<button class="success" onclick="saveSettings()">
+💾 حفظ الإعدادات
+</button>
+
+</div>
+
+</section>
 
     </main>
 
@@ -1277,28 +1339,47 @@ updateCart();
 إتمام الدفع
 ==================================*/
 
-document
-.getElementById("payBtn")
-.onclick=function(){
+document.getElementById("payBtn").onclick = function () {
 
-if(cart.length===0){
+    if(cart.length === 0){
+        alert("الفاتورة فارغة");
+        return;
+    }
 
-alert("الفاتورة فارغة");
+    // خصم الكمية من المخزون
+    cart.forEach(cartItem => {
 
-return;
+        const item = stock.find(s => s.name === cartItem.name);
 
-}
+        if(item){
 
-alert(
+            if(item.qty >= cartItem.qty){
 
-"✅ تمت عملية البيع بنجاح"
+                item.qty -= cartItem.qty;
 
-);
+            }else{
 
-cart=[];
+                item.qty = 0;
 
-updateCart();
+            }
 
+        }
+
+    });
+
+    // حفظ المخزون
+    localStorage.setItem("stock", JSON.stringify(stock));
+
+    // تحديث جدول المخزون
+    renderStock();
+
+    alert("✅ تمت عملية البيع بنجاح");
+
+    cart = [];
+
+    updateCart();
+
+};
 };
 
 /*==================================
@@ -1595,7 +1676,136 @@ closeAddStock();
 
 renderStock();
 
+/*==========================
+التقارير
+==========================*/
+
+let reports = JSON.parse(localStorage.getItem("reports")) || {
+
+sales:0,
+invoices:0,
+items:0
+
+};
+
+function renderReports(){
+
+const sales=document.getElementById("reportSales");
+const invoices=document.getElementById("reportInvoices");
+const items=document.getElementById("reportItems");
+
+if(!sales) return;
+
+sales.textContent=reports.sales.toFixed(2)+" ج.م";
+invoices.textContent=reports.invoices;
+items.textContent=reports.items;
+
+}
+
+function saveReports(){
+
+localStorage.setItem(
+"reports",
+JSON.stringify(reports)
+);
+
+renderReports();
+
+}
+
+function resetReports(){
+
+if(!confirm("هل تريد تصفير جميع التقارير؟")) return;
+
+reports={
+
+sales:0,
+invoices:0,
+items:0
+
+};
+
+saveReports();
+
+}
+
+renderReports();
+
+    /*==========================
+الإعدادات
+==========================*/
+
+let settings = JSON.parse(localStorage.getItem("settings")) || {
+
+storeName:"Jaguar POS",
+currency:"ج.م",
+tax:0,
+logo:""
+
+};
+
+function loadSettings(){
+
+document.getElementById("storeName").value=settings.storeName;
+document.getElementById("currency").value=settings.currency;
+document.getElementById("tax").value=settings.tax;
+document.getElementById("storeLogo").value=settings.logo;
+
+document.querySelector(".logo").innerHTML=
+`<i class="fa-solid fa-cash-register"></i> ${settings.storeName}`;
+
+document.title=settings.storeName;
+
+}
+
+function saveSettings(){
+
+settings.storeName=document.getElementById("storeName").value;
+settings.currency=document.getElementById("currency").value;
+settings.tax=Number(document.getElementById("tax").value);
+settings.logo=document.getElementById("storeLogo").value;
+
+localStorage.setItem(
+"settings",
+JSON.stringify(settings)
+);
+
+loadSettings();
+
+alert("✅ تم حفظ الإعدادات");
+
+}
+
+loadSettings();
+
 </script>
+<!-- نافذة قارئ الباركود -->
+<div id="scannerModal" class="modal">
+
+<div class="modal-content">
+
+<h2>📷 مسح الباركود</h2>
+
+<video
+id="barcodeVideo"
+autoplay
+playsinline
+style="
+width:100%;
+border-radius:12px;
+background:#000;
+">
+</video>
+
+<button
+class="danger"
+onclick="stopScanner()">
+❌ إغلاق
+</button>
+
+</div>
+
+</div>
 
 </body>
 
