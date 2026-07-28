@@ -755,66 +755,6 @@ margin-top:10px;
 
 </section>
 
-<section id="inventoryPage" class="page" style="display:none;">
-
-<div class="card">
-
-<h2 class="card-title">إدارة المخزون</h2>
-
-<button class="success" onclick="openAddStock()">
-➕ إضافة مخزون جديد
-</button>
-
-<br><br>
-
-<table>
-
-<thead>
-
-<tr>
-<th>المنتج</th>
-<th>السعر</th>
-<th>الكمية</th>
-<th>الحالة</th>
-</tr>
-
-</thead>
-
-<tbody id="stockTable">
-
-</tbody>
-
-</table>
-
-</div>
-
-<div id="stockModal" class="modal">
-
-<div class="modal-content">
-
-<h2>إضافة منتج</h2>
-
-<input id="stockName" placeholder="اسم المنتج">
-
-<input id="stockPrice" type="number" placeholder="السعر">
-
-<input id="stockQty" type="number" placeholder="الكمية">
-
-<input id="stockImage" placeholder="رابط الصورة">
-
-<button class="success" onclick="saveStock()">
-حفظ
-</button>
-
-<button class="danger" onclick="closeAddStock()">
-إلغاء
-</button>
-
-</div>
-
-</div>
-
-</section>
         <!-- صفحة المنتجات -->
 
       <section
@@ -1372,6 +1312,20 @@ document.getElementById("payBtn").onclick = function () {
 
     // تحديث جدول المخزون
     renderStock();
+// تحديث التقارير
+let totalSale = 0;
+let totalItems = 0;
+
+cart.forEach(item => {
+    totalSale += item.price * item.qty;
+    totalItems += item.qty;
+});
+
+reports.sales += totalSale;
+reports.invoices += 1;
+reports.items += totalItems;
+
+saveReports();
 
     alert("✅ تمت عملية البيع بنجاح");
 
@@ -1656,7 +1610,8 @@ image
 });
 
 products.push({
-id:Date.now()+1,
+id:Date.now(),
+barcode:String(Date.now()),
 name,
 price,
 image
@@ -1776,6 +1731,58 @@ alert("✅ تم حفظ الإعدادات");
 }
 
 loadSettings();
+    /*==========================
+قارئ الباركود
+==========================*/
+
+let codeReader = null;
+
+function startScanner(){
+
+    document.getElementById("scannerModal").style.display="flex";
+
+    codeReader = new ZXing.BrowserMultiFormatReader();
+
+    codeReader.decodeFromVideoDevice(null, "barcodeVideo", (result, err) => {
+
+        if(result){
+
+            const barcode = result.text;
+
+            stopScanner();
+
+            const product = products.find(p =>
+                String(p.id) === barcode ||
+                p.barcode === barcode
+            );
+
+            if(product){
+
+                addToCart(product.id);
+
+            }else{
+
+                alert("المنتج غير موجود");
+
+            }
+
+        }
+
+    });
+
+}
+
+function stopScanner(){
+
+    if(codeReader){
+
+        codeReader.reset();
+
+    }
+
+    document.getElementById("scannerModal").style.display="none";
+
+}
 
 </script>
 <!-- نافذة قارئ الباركود -->
