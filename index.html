@@ -425,7 +425,8 @@ width:100%;
 
 }
 
-}التالي
+}
+
 .content{
 
 display:grid;
@@ -543,6 +544,7 @@ padding:40px;
 }
 </style>
 <script src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
 </head>
 
 <body>
@@ -870,6 +872,14 @@ onclick="saveProduct()">
 <input id="stockQty" type="number" placeholder="الكمية">
 
 <input id="stockImage" placeholder="رابط الصورة">
+<input id="stockBarcode" placeholder="رابط صورة الباركود">
+
+<label>صورة الباركود</label>
+
+<input
+type="file"
+id="barcodeImage"
+accept="image/*">
 
 <button class="success" onclick="saveStock()">
 حفظ
@@ -1207,13 +1217,14 @@ onclick="removeItem(${item.id})">
 
 });
 
-itemsCount.textContent=count;
+itemsCount.textContent = count;
 
-totalPrice.textContent=
+const taxValue = total * (settings.tax / 100);
+const finalTotal = total + taxValue;
 
-total.toFixed(2)+" ج.م";
-
-}
+totalPrice.textContent =
+finalTotal.toFixed(2) + " " + settings.currency;
+};
 
 /*==================================
 زيادة الكمية
@@ -1414,35 +1425,41 @@ onclick="deleteProduct(${product.id})">
 
 function saveProduct(){
 
-const name=
-document.getElementById("productName").value.trim();
+    const name = document.getElementById("productName").value.trim();
+    const price = Number(document.getElementById("productPrice").value);
+    const image = document.getElementById("productImage").value.trim();
 
-const price=
-Number(document.getElementById("productPrice").value);
+    if(!name || !price || !image){
 
-const image=
-document.getElementById("productImage").value.trim();
+        alert("أكمل جميع البيانات");
+        return;
 
-if(!name||!price||!image){
+    }
 
-alert("أكمل جميع البيانات");
+    products.push({
 
-return;
+        id: Date.now(),
+        name: name,
+        price: price,
+        image: image
+
+    });
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+    renderProducts(products);
+    renderProductsTable();
+
+    document.getElementById("productName").value = "";
+    document.getElementById("productPrice").value = "";
+    document.getElementById("productImage").value = "";
+
+    alert("✅ تم إضافة المنتج");
 
 }
-
-products.push({
-
-id:Date.now(),
-
-name,
-
-price,
-
-image
-
-});
-
 localStorage.setItem(
 "products",
 JSON.stringify(products)
@@ -1455,8 +1472,6 @@ renderProductsTable();
 document.getElementById("productName").value="";
 document.getElementById("productPrice").value="";
 document.getElementById("productImage").value="";
-
-}
 
 /*==================================
 حذف منتج
@@ -1588,46 +1603,102 @@ document.getElementById("stockModal").style.display="none";
 
 function saveStock(){
 
-const name=document.getElementById("stockName").value.trim();
-const price=Number(document.getElementById("stockPrice").value);
-const qty=Number(document.getElementById("stockQty").value);
-const image=document.getElementById("stockImage").value.trim();
+    const name = document.getElementById("stockName").value.trim();
+    const price = Number(document.getElementById("stockPrice").value);
+    const qty = Number(document.getElementById("stockQty").value);
+    const image = document.getElementById("stockImage").value.trim();
 
-if(!name||!price||!qty||!image){
+    const barcodeFile =
+    document.getElementById("barcodeImage").files[0];
 
-alert("أكمل جميع البيانات");
+    if(!name || !price || !qty || !image || !barcodeFile){
 
-return;
+        alert("أكمل جميع البيانات");
+        return;
+
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        const img = new Image();
+
+        img.onload = function(){
+
+            const codeReader = new ZXing.BrowserMultiFormatReader();
+
+            codeReader.decodeFromImageElement(img)
+
+            .then(result=>{
+
+                const barcode = result.text;
+
+                const id = Date.now();
+
+                stock.push({
+
+                    id,
+                    barcode,
+                    name,
+                    price,
+                    qty,
+                    image
+
+                });
+
+                products.push({
+
+                    id,
+                    barcode,
+                    name,
+                    price,
+                    image
+
+                });
+
+                localStorage.setItem(
+                    "stock",
+                    JSON.stringify(stock)
+                );
+
+                localStorage.setItem(
+                    "products",
+                    JSON.stringify(products)
+                );
+
+                renderStock();
+                renderProducts(products);
+                renderProductsTable();
+
+                document.getElementById("stockName").value = "";
+                document.getElementById("stockPrice").value = "";
+                document.getElementById("stockQty").value = "";
+                document.getElementById("stockImage").value = "";
+                document.getElementById("barcodeImage").value = "";
+
+                closeAddStock();
+
+                alert("✅ تم التعرف على الباركود:\n" + barcode);
+
+            })
+
+            .catch(err=>{
+
+                console.error(err);
+                alert("❌ تعذر قراءة الباركود من الصورة");
+
+            });
+
+        };
+
+        img.src = e.target.result;
+
+    };
+
+    reader.readAsDataURL(barcodeFile);
 
 }
-
-stock.push({
-id:Date.now(),
-name,
-price,
-qty,
-image
-});
-
-products.push({
-id:Date.now(),
-barcode:String(Date.now()),
-name,
-price,
-image
-});
-
-localStorage.setItem("stock",JSON.stringify(stock));
-localStorage.setItem("products",JSON.stringify(products));
-
-renderStock();
-renderProducts(products);
-renderProductsTable();
-
-closeAddStock();
-
-}
-
 renderStock();
 
 /*==========================
